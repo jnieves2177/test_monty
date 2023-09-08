@@ -56,7 +56,7 @@ void pstr(stack_t **h, unsigned int line_number);
 void rotl(stack_t **h, unsigned int line_number);
 void rotr(stack_t **h, unsigned int line_number);
 
-/* calculator prototypes */
+/* arithmetic prototypes */
 void _add(stack_t **h, unsigned int line_number);
 void _sub(stack_t **h, unsigned int line_number);
 void _mul(stack_t **h, unsigned int line_number);

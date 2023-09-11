@@ -4,20 +4,20 @@
  * @h: node to be swapped
  * @line_number: node number
  */
-void swap(stack_t **h, unsigned int line_number)
+void swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp = NULL;
 
-	if (*h == NULL || (*h)->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%u: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	tmp = (*h)->next;
+	tmp = (*stack)->next;
 	if (tmp->next != NULL)
 	{
-		(*h)->next = tmp->next;
-		(*h)->next->prev = *h;
+		(*stack)->next = tmp->next;
+		(*stack)->next->prev = *h;
 
 	}
 	else
@@ -27,28 +27,28 @@ void swap(stack_t **h, unsigned int line_number)
 	}
 	tmp->prev = NULL;
 	tmp->next = *h;
-	(*h) = tmp;
+	(*stack) = tmp;
 }
 /**
  * rotl - rotate so top of stack becomes last one, second becomes first one
  * @h: node to be rotated
  * @line_number: node number
  */
-void rotl(stack_t **h, unsigned int line_number)
+void rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 
 	(void) line_number;
 
-	if ((*h)->next != NULL)
+	if ((*stack)->next != NULL)
 	{
-		tmp = *h;
+		tmp = *stack;
 		while (tmp->next != NULL)
 			tmp = tmp->next;
-		(*h)->prev = tmp;
+		(*stack)->prev = tmp;
 		tmp->next = *h;
-		(*h)->next->prev = NULL;
-		*h = (*h)->next;
+		(*stack)->next->prev = NULL;
+		*stack = (*stack)->next;
 		tmp->next->next = NULL;
 	}
 }
@@ -57,21 +57,21 @@ void rotl(stack_t **h, unsigned int line_number)
  * @h: node to be rotated
  * @line_number: node number
  */
-void rotr(stack_t **h, unsigned int line_number)
+void rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 
 	(void) line_number;
 
-	if ((*h)->next != NULL)
+	if ((*stack)->next != NULL)
 	{
-		tmp = *h;
+		tmp = *stack;
 		while (tmp->next != NULL)
 			tmp = tmp->next;
-		(*h)->prev = tmp;
+		(*stack)->prev = tmp;
 		tmp->next = *h;
 		tmp->prev->next = NULL;
 		tmp->prev = NULL;
-		(*h) = (*h)->prev;
+		(*stack) = (*stack)->prev;
 	}
 }

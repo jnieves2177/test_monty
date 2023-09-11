@@ -24,14 +24,14 @@ int is_number(const char *n)
  * @line_number: bytecode line number
  * @n: integer
  */
-void push(stack_t **h, unsigned int line_number, const char *n)
+void push(stack_t **stack, unsigned int line_number, const char *n)
 {
-	if (!h)
+	if (!stack)
 		return;
 	if (is_number(n) == -1)
 	{
 		printf("L%u: usage: push integer\n", line_number);
-		free_dlist(h);
+		free_dlist(stack);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -48,14 +48,14 @@ void push(stack_t **h, unsigned int line_number, const char *n)
  * @h: head of linked list (node at the bottom of stack)
  * @line_number: bytecode line number
  */
-void pop(stack_t **h, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number)
 {
-	if (h == NULL || *h == NULL)
+	if (stack == NULL || *stack == NULL)
 	{
 		printf("L%u: can't pop an empty stack\n", line_number);
-		free_dlist(h);
+		free_dlist(stack);
 		exit(EXIT_FAILURE);
 	}
 	else
-		delete_end_node(h);
+		delete_end_node(stack);
 }

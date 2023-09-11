@@ -5,11 +5,11 @@
  * @n: node data
  * Return: 0 if success, -1 if failed
  */
-int add_end_node(stack_t **h, int n)
+int add_end_node(stack_t **stack, int n)
 {
 	stack_t *new;
 
-	if (!h)
+	if (!stack)
 		return (-1);
 
 	/* malloc and set new node data */
@@ -22,17 +22,17 @@ int add_end_node(stack_t **h, int n)
 	new->n = n;
 
 	/* account for empty linked list */
-	if (*h == NULL)
+	if (*stack == NULL)
 	{
-		*h = new;
+		*stack = new;
 		new->next = NULL;
 		new->prev = NULL;
 	}
 	else /* insert to front */
 	{
 		new->next = *h;
-		(*h)->prev = new;
-		*h = new;
+		(*stack)->prev = new;
+		*stack = new;
 	}
 	return (0);
 }
@@ -40,21 +40,21 @@ int add_end_node(stack_t **h, int n)
  * delete_end_node - deletes node at end of doubly linked list
  * @h: pointer to head of doubly linked list
  */
-void delete_end_node(stack_t **h)
+void delete_end_node(stack_t **stack)
 {
 	stack_t *del = NULL;
 
 	/* account for only one node in list */
-	del = *h;
-	if ((*h)->next == NULL)
+	del = *stack;
+	if ((*stack)->next == NULL)
 	{
-		*h = NULL;
+		*stack = NULL;
 		free(del);
 	}
 	else /* else delete front, and link correctly */
 	{
-		*h = (*h)->next;
-		(*h)->prev = NULL;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
 		free(del);
 	}
 }
@@ -62,16 +62,16 @@ void delete_end_node(stack_t **h)
  * free_dlist - frees a doubly linked list with only int data, no strings
  * @h: pointer to head of list
  */
-void free_dlist(stack_t **h)
+void free_dlist(stack_t **stack)
 {
 	/* return if empty list */
-	if (!h)
+	if (!stack)
 		return;
 
-	while (*h && (*h)->next)
+	while (*stack && (*stack)->next)
 	{
-		*h = (*h)->next;
-		free((*h)->prev);
+		*stack = (*stack)->next;
+		free((*stack)->prev);
 	}
-	free(*h);
+	free(*stack);
 }

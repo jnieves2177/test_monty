@@ -4,15 +4,15 @@
  * @h: head of list
  * @line_number: bytecode line number
  */
-void pall(stack_t **h, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp = NULL;
 
-	if (!h || !*h)
+	if (!stack || !*stack)
 		return;
 
 	(void) line_number;
-	tmp = *h;
+	tmp = *stack;
 	while (tmp != NULL)
 	{
 		printf("%d\n", tmp->n);
@@ -24,14 +24,14 @@ void pall(stack_t **h, unsigned int line_number)
  * @h: head of list
  * @line_number: bytecode line number
  */
-void pint(stack_t **h, unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_number)
 {
-	if (!h || !*h)
+	if (!stack || !*stack)
 	{
 		printf("L%u: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", (*h)->n);
+	printf("%d\n", (*stack)->n);
 
 }
 /**
@@ -39,15 +39,15 @@ void pint(stack_t **h, unsigned int line_number)
  * @h: head of list
  * @line_number: bytecode line number
  */
-void pchar(stack_t **h, unsigned int line_number)
+void pchar(stack_t **stack, unsigned int line_number)
 {
-	if (!h || !*h)
+	if (!stack || !*stack)
 	{
 		printf("L%u: can't pchar, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	if (((*h)->n) >= 0 && ((*h)->n) <= 127)
-		printf("%c\n", (*h)->n);
+	if (((*h)->n) >= 0 && ((*stack)->n) <= 127)
+		printf("%c\n", (*stack)->n);
 	else
 	{
 		printf("L%u: can't pchar, value out of range\n", line_number);
@@ -61,16 +61,16 @@ void pchar(stack_t **h, unsigned int line_number)
  * @h: head of list
  * @line_number: bytecode line number
  */
-void pstr(stack_t **h, unsigned int line_number)
+void pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 
-	if (!h || !*h)
+	if (!stack || !*stack)
 	{
 		printf("L%u: can't pchar, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	tmp = *h;
+	tmp = *stack;
 	while ((tmp != NULL) && (tmp->n != 0) &&
 	       (tmp->n >= 0) && (tmp->n <= 127))
 	{
@@ -81,11 +81,11 @@ void pstr(stack_t **h, unsigned int line_number)
 }
 /**
  * nop - do nothing
- * @h: head of list
+ * @stack: head of list
  * @line_number: bytecode line number
  */
-void nop(stack_t **h, unsigned int line_number)
+void nop(stack_t **stack, unsigned int line_number)
 {
-	(void) h;
+	(void) stack;
 	(void) line_number;
 }
